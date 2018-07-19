@@ -121,9 +121,11 @@ static id ObjectOrNull(id object)
     
     for(PHCollection *collection in albums)
     {
-        NSMutableDictionary *albumDictionary = [self generateAlbumResponseFromCollection:collection numberOfPreviewAssets:numberOfPreviewAssets countType:countType includeMetadata:includeMetadata includeResourcesMetadata:includeResourcesMetadata cacheAssets:cacheAssets assetFetchParams:assetFetchParams];
+        if (collection.localizedTitle != nil) {
+            NSMutableDictionary *albumDictionary = [self generateAlbumResponseFromCollection:collection numberOfPreviewAssets:numberOfPreviewAssets countType:countType includeMetadata:includeMetadata includeResourcesMetadata:includeResourcesMetadata cacheAssets:cacheAssets assetFetchParams:assetFetchParams];
             
-        [albumsArray addObject:albumDictionary];
+            [albumsArray addObject:albumDictionary];
+        }
         
     }
     [collectionDictionary setObject:albumsArray forKey:@"albums"];
